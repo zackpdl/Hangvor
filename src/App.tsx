@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGame } from './hooks/useGame';
 import { GameScreen } from './components/GameScreen';
 import { GameOver } from './components/GameOver';
 import { PlayerSetup } from './components/PlayerSetup';
+import { GameSelector, GameType } from './components/GameSelector';
+import { NeverHaveIEver } from './components/NeverHaveIEver';
+import { PartyTasks } from './components/PartyTasks';
 
 function App() {
   const { gameState, startGame, nextQuestion, initializePlayers, endGame } = useGame();
   const { isPlaying, currentQuestion, loser, players, timeRemaining } = gameState;
+  const [selectedGame, setSelectedGame] = useState<GameType | null>(null);
+
+  const handleEndGame = () => {
+    endGame();
+    setSelectedGame(null);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center p-4">
@@ -16,27 +25,24 @@ function App() {
         </h1>
         
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl">
-          {!isPlaying && !loser && players.length === 0 && (
+          {!selectedGame && !isPlaying && !loser && players.length === 0 && (
             <PlayerSetup 
               onStartGame={(players) => {
                 initializePlayers(players);
-                startGame();
               }} 
             />
           )}
 
-          {!isPlaying && !loser && players.length > 0 && (
-            <div className="text-center">
-              <button
-                onClick={startGame}
-                className="px-6 py-3 bg-white text-purple-600 rounded-lg hover:bg-purple-50 transition-colors font-bold"
-              >
-                Start Game
-              </button>
-            </div>
+          {!selectedGame && !isPlaying && !loser && players.length > 0 && (
+            <GameSelector onSelectGame={(gameType) => {
+              setSelectedGame(gameType);
+              if (gameType === 'hangver') {
+                startGame();
+              }
+            }} />
           )}
 
-          {isPlaying && currentQuestion && (
+          {selectedGame === 'hangver' && isPlaying && currentQuestion && (
             <GameScreen 
               question={currentQuestion}
               timeRemaining={timeRemaining}
@@ -44,12 +50,26 @@ function App() {
             />
           )}
 
+          {selectedGame === 'never-have-i-ever' && players.length > 0 && (
+            <NeverHaveIEver 
+              players={players}
+              onEndGame={handleEndGame}
+            />
+          )}
+
+          {selectedGame === 'party-tasks' && players.length > 0 && (
+            <PartyTasks
+              players={players}
+              onEndGame={handleEndGame}
+            />
+          )}
+
           {loser && <GameOver loser={loser} onRestart={startGame} />}
         </div>
 
-        {(isPlaying || players.length > 0) && (
+        {((isPlaying && selectedGame === 'hangver') || (players.length > 0 && !selectedGame)) && (
           <button
-            onClick={endGame}
+            onClick={handleEndGame}
             className="mt-4 w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
           >
             End Game

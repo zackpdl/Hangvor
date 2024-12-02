@@ -47,33 +47,33 @@ export function NeverHaveIEver({ players, onEndGame }: NeverHaveIEverProps) {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-xl font-bold text-white mb-2">
+        <h2 className="text-xl font-bold text-white dark:text-white mb-2">
           {currentPlayer.name}'s Turn
         </h2>
-        <p className="text-white/80 text-sm">
+        <p className="text-white/80 dark:text-white/70 text-sm">
           Read the statement and drink if you have done it!
         </p>
       </div>
 
-      <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-        <p className="text-xl text-white text-center font-medium">
+      <div className="bg-white/20 dark:bg-white/10 backdrop-blur-sm rounded-lg p-6">
+        <p className="text-xl text-white dark:text-white text-center font-medium">
           Never have I ever...
         </p>
-        <p className="text-2xl text-white text-center font-bold mt-4">
+        <p className="text-2xl text-white dark:text-white text-center font-bold mt-4">
           {statement}
         </p>
       </div>
 
       <button
         onClick={nextTurn}
-        className="w-full px-6 py-3 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors font-bold"
+        className="w-full px-6 py-3 bg-white/20 dark:bg-white/10 hover:bg-white/30 dark:hover:bg-white/20 text-white rounded-lg transition-colors font-bold"
       >
         Next Player
       </button>
 
       <button
         onClick={onEndGame}
-        className="w-full px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-bold"
+        className="w-full px-6 py-3 bg-red-500 dark:bg-red-700 hover:bg-red-600 dark:hover:bg-red-800 text-white rounded-lg transition-colors font-bold"
       >
         End Game
       </button>

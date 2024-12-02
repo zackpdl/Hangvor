@@ -9,13 +9,13 @@ interface GameSelectorProps {
 export function GameSelector({ onSelectGame }: GameSelectorProps) {
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold text-white text-center mb-6">
+      <h2 className="text-2xl font-bold text-white dark:text-white text-center mb-6">
         Choose Your Game
       </h2>
       
       <button
         onClick={() => onSelectGame('hangver')}
-        className="w-full px-6 py-4 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors"
+        className="w-full px-6 py-4 bg-white/20 dark:bg-white/10 hover:bg-white/30 dark:hover:bg-white/20 text-white rounded-lg transition-colors"
       >
         <h3 className="text-xl font-bold mb-2">Hangver</h3>
         <p className="text-sm opacity-80">
@@ -25,7 +25,7 @@ export function GameSelector({ onSelectGame }: GameSelectorProps) {
 
       <button
         onClick={() => onSelectGame('never-have-i-ever')}
-        className="w-full px-6 py-4 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors"
+        className="w-full px-6 py-4 bg-white/20 dark:bg-white/10 hover:bg-white/30 dark:hover:bg-white/20 text-white rounded-lg transition-colors"
       >
         <h3 className="text-xl font-bold mb-2">Never Have I Ever</h3>
         <p className="text-sm opacity-80">
@@ -35,7 +35,7 @@ export function GameSelector({ onSelectGame }: GameSelectorProps) {
 
       <button
         onClick={() => onSelectGame('party-tasks')}
-        className="w-full px-6 py-4 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-colors"
+        className="w-full px-6 py-4 bg-white/20 dark:bg-white/10 hover:bg-white/30 dark:hover:bg-white/20 text-white rounded-lg transition-colors"
       >
         <h3 className="text-xl font-bold mb-2">Party Tasks</h3>
         <p className="text-sm opacity-80">

@@ -6,7 +6,7 @@ class SoundManager {
 
   constructor() {
     this.tickSound = new Audio('https://cdn.freesound.org/previews/263/263133_2064400-lq.mp3');
-    this.explosionSound = new Audio('https://cdn.freesound.org/previews/587/587183_1187022-lq.mp3');
+    this.explosionSound = new Audio('/explosion.wav');
     this.explosionSound.volume = 0.6;
   }
 
